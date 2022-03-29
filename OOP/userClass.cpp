@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <string>
 #include<windows.h>
+
 using namespace std;
 class USER{
 	/*
@@ -18,7 +19,7 @@ class USER{
 	chữ số thứ nhất là giới tính: Nam:0, Nữ:1,Khác:2
 	3 chữ số còn lại để gì cũng được(để theo thứ tự 001 002 003,.. cho dễ quản lý)
 	*/
-	protected:
+	private:
 		string id;
 		string name;
 		int age;
@@ -26,7 +27,7 @@ class USER{
 		int role;
 		bool status;
 	public:
-		USER(){}
+		//USER(){}
 		USER(string id, string name, int _age, int _gender, int _role, bool _status)
 		{
             this->id = id;

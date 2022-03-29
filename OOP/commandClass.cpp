@@ -5,13 +5,15 @@
 #include <iomanip>
 #include <windows.h>
 #include "userClass.cpp"
+#include "logClass.cpp"
 //#include "manager.cpp"
 using namespace std;
 
 class Command
 {
-protected:
+private:
     vector<USER> usersList;
+    vector<Logs> logsList;
     USER user;
 
 public:
@@ -74,12 +76,17 @@ public:
         if(checkId()){
         user.setStatus(true);
         cout<<"Ban da di vao!"<<endl;
+        logsList.push_back(Logs(user,currentDateTime()));
         }
     }
     void checkOut(){
-        user.setStatus(false);
-        cout<<"Ban da di ra!"<<endl;
+        if((user.getId()==Logs.getLogId()) && checkId()){
+            cout<<"Ban da di ra!"<<endl;
+            user.setStatus(false);
+            Logs.setTimeOut(currentDateTime());
+        }
     }
+
     void deleteUser(){
         cout<<"Nhap ID nguoi dung can xoa:";
         string deleId;
@@ -182,4 +189,14 @@ public:
                 usersList[i].outPut();
         cout << "Nhan enter de tiep tuc.";
     }
+    string currentDateTime() {
+    time_t now = time(0);
+    struct tm tstruct;
+    char buf[80];
+    tstruct = *gmtime(&now);
+    tstruct.tm_hour += 7;
+    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+
+    return buf;
+}
 };
