@@ -37,6 +37,8 @@ class USER{
 		    role = _role;
 		    status = _status;
 		}
+		USER(){}
+
 		void setId(string id);
 		string getId();
 
@@ -136,7 +138,6 @@ inline bool USER::getStatus(){
  }
  inline void USER::inPut(){
 	cout<<"Nhap ID nguoi dung: ";
-	cin.ignore();
 	getline(cin,id);
 }
  inline void USER::outPut(){
