@@ -37,7 +37,7 @@ class USER{
 		    role = _role;
 		    status = _status;
 		}
-		USER(){}
+		USER(){};
 
 		void setId(string id);
 		string getId();

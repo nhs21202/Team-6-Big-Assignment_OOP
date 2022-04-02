@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-
+#include <stdlib.h>
+#include <sstream>
 using namespace std;
 
 class Menu
@@ -23,6 +24,18 @@ inline bool match(int c, int arr[], int n)
             return true;
     return false;
 }
+
+//inline int inputFormat()
+//{
+//    string s;
+//    getline(cin, s);
+//    while(s.length()>1 || atoi(s.c_str())>9 || atoi(s.c_str())<1)
+//    {
+//        cout << "Moi nhap lai:";
+//        getline(cin, s);
+//    }
+//    return atoi()
+//}
 
 inline int input(int arr[], int n)
 {
