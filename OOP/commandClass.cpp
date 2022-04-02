@@ -11,11 +11,10 @@ using namespace std;
 class Command
 {
 private:
-    //  vector<Logs> logs
     vector<USER> usersList;
     USER user;
     DateTime dateTime;
-    vector<USER> logList;      // truy xuat 
+    vector<USER> logList;      // truy xuat
     vector<string> timeLogIn;  // song song
     vector<string> timeLogOut; // ca 3 cai
 
@@ -55,9 +54,11 @@ public:
     void editing();              // View in ra de edit nguoi dung
     void managerView();          // View in ra danh cho manager
     void residentView();         // View in ra danh cho nguoi o
-    USER getCurrentUser(string); // VAN HIEU ADD THEM
-    int getIndexById(string);    // VAN HIEU ADD THEM
-    void getLogList();
+    USER getCurrentUser(string); // Su dung de quan ly thoi gian vao ra
+    int getIndexById(string);    // Su dung de quan ly thoi gian vao ra
+    void getLogList();           // Danh sach thoi gian vao ra
+    void tableTitle();           // Tieu de bang cho cac danh sach
+
 };
 
 inline int Command::getIndexById(string id)
@@ -80,13 +81,19 @@ inline USER Command::getCurrentUser(string id)
 }
 
 inline void Command::getLogList() {
-    cout<< setw(20) << "Ho ten" << setw(20) << "Chuc vu" << setw(30) << "Thoi gian vao" << setw(30) << "Thoi gian ra" <<endl;
+    cout<<"----------------------------------------------DANH SACH RA VAO--------------------------------------------\n\n";
+    cout<<"==========================================================================================================\n";
+    cout<<"|"<<setw(8)<<"ID   "<<"|"<< setw(20) << "HO VA TEN     " <<"|"<< setw(11)<<"CHUC VU  " <<"|"<< setw(31) << "Thoi gian vao         " <<"|"<< setw(30) << "Thoi gian ra         "<<"|"<<endl;
+    cout<<"==========================================================================================================\n";
+
     for (int i = 0; i < logList.size(); i++)
     {
-        cout<< setw(20) << logList[i].getName() << setw(20) << logList[i].getRole() << setw(30) << timeLogIn[i] << setw(30) << timeLogOut[i] <<endl;
+        cout<<"|"<<setw(8)<<logList[i].getId()<<"|"<< setw(20) << logList[i].getName() <<"|"<< setw(11) << logList[i].toStringRole()<<"|"<< setw(31) << timeLogIn[i] <<"|"<< setw(30) << timeLogOut[i] <<"|"<<endl;
+        cout<<"==========================================================================================================\n";
     }
     cout << "Nhan enter de tiep tuc.";
     getch();
+
 }
 
 inline void Command::logIn()
@@ -241,6 +248,8 @@ inline void Command::addUser()
 
 inline void Command::getEmployeeList()
 {
+    cout<<"---------------------DANH SACH NHAN VIEN----------------------\n"<<endl;
+    tableTitle();
     for (int i = 0; i < usersList.size(); i++)
         if (usersList[i].getRole() == 3)
             usersList[i].outPut();
@@ -250,6 +259,8 @@ inline void Command::getEmployeeList()
 
 inline void Command::getResidentList()
 {
+     cout<<"---------------------DANH SACH CU DAN----------------------\n"<<endl;
+    tableTitle();
     for (int i = 0; i < usersList.size(); i++)
         if (usersList[i].getRole() == 2)
             usersList[i].outPut();
@@ -259,6 +270,8 @@ inline void Command::getResidentList()
 
 inline void Command::getManagerList()
 {
+     cout<<"---------------------DANH SACH QUAN LY----------------------\n"<<endl;
+    tableTitle();
     for (int i = 0; i < usersList.size(); i++)
         if (usersList[i].getRole() == 1)
             usersList[i].outPut();
@@ -339,4 +352,13 @@ inline void Command::residentView()
             break;
         }
     } while (choose != 9 && choose != 3);
+}
+inline void Command:: tableTitle(){
+    cout<<"==============================================================\n";
+    cout<<"|"<<setw(8)<<"ID   ";
+	cout<<"|"<<setw(20)<<"HO VA TEN     ";
+ 	cout<<"|"<<setw(6)<<"TUOI ";
+ 	cout<<"|"<<setw(11)<<"GIOI TINH ";
+ 	cout<<"|"<<setw(11)<<"CHUC VU  "<<"|"<<endl;
+ 	cout<<"=============================================================="<<endl;
 }

@@ -16,24 +16,24 @@ private:
     int input();
 };
 
-inline bool match(char c, int arr[], int n)
+inline bool match(int c, int arr[], int n)
 {
     for(int i=0;i<n;i++)
-        if(((int)c-'0') == arr[i])
+        if(c == arr[i])
             return true;
     return false;
 }
 
 inline int input(int arr[], int n)
 {
-    char c;
-    cin >> c;
-    while(!match(c, arr, n))
+    string s;
+    getline(cin, s);
+    while(!match(atoi(s.c_str()), arr, n))
     {
         cout << "Moi ban nhap lai: ";
-        cin >> c;
+        getline(cin, s);
     }
-    return c - '0';
+    return atoi(s.c_str());
 }
 
 inline int generalMenu(){
@@ -45,23 +45,21 @@ inline int generalMenu(){
 	cout<<"*  Hay nhap 1 hoac 9                             *\n";
 	cout<<"**************************************************\n";
     int choice[2] = {1,9};
-    int number = input(choice, 2);
-    return number;
+    return input(choice, 2);
 }
 
 
 inline int residentMenu(){
 	cout<<"************He thong ra vao toa nha***************\n";
 	cout<<"**************************************************\n";
-	cout<<"*  1. Check in.                        		    *\n";
-	cout<<"*  2. Check out.                 	        	*\n";
+	cout<<"*  1. Check in.                                  *\n";
+	cout<<"*  2. Check out.                                 *\n";
 	cout<<"*  3. Dang xuat                                  *\n";
 	cout<<"*  9. Thoat chuong trinh                         *\n";
 	cout<<"*  Hay nhap 1,2,3 hoac 9                         *\n";
 	cout<<"**************************************************\n";
     int choice[4] = {1,2,3,9};
-    int number = input(choice, 4);
-    return number;
+    return input(choice, 4);
 }
 
 inline int managerMenu(){
@@ -79,8 +77,7 @@ inline int managerMenu(){
 	cout<<"*  Hay nhap 1->9                                 *\n";
 	cout<<"**************************************************\n";
 	int choice[9] = {1,2,3,4,5,6,7,8,9};
-    int number = input(choice, 9);
-    return number;
+    return input(choice, 9);
 }
 
 inline int editMenu(){
@@ -95,6 +92,5 @@ inline int editMenu(){
 	cout<<"*  Hay nhap lua chon:                            *\n";
 	cout<<"**************************************************\n";
 	int choice[5] = {1,2,3,4,9};
-    int number = input(choice, 5);
-    return number;
+    return input(choice, 5);
 }
