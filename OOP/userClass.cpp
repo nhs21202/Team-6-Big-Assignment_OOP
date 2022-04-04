@@ -5,21 +5,8 @@
 #include<windows.h>
 
 using namespace std;
-class USER{
-	/*
-	1. quan ly
-	2. cu dan
-	3. khach
-	 */
-
-	/*id dạng:2 chữ, 4 số, 2 chữ viết hoa viết tắt Role
-	quản lí: QL
-	cư dân: CD
-	khách: KK
-	chữ số thứ nhất là giới tính: Nam:0, Nữ:1,Khác:2
-	3 chữ số còn lại để gì cũng được(để theo thứ tự 001 002 003,.. cho dễ quản lý)
-	*/
-	private:
+class PEOPLE{
+    protected:
 		string id;
 		string name;
 		int age;
@@ -27,15 +14,101 @@ class USER{
 		int role;
 		bool status;
 	public:
-		//USER(){}
+        PEOPLE(){};
+        PEOPLE(string id, string name, int age, int gender, int role, bool status){
+            this->id = id;
+            this->name = name;
+            this->age = age;
+            this->gender = gender;
+            this->role = role;
+            this->status = status;
+
+        };
+};
+
+class MANAGER: virtual public PEOPLE{
+    private:
+        string address;
+    public:
+        MANAGER(){};
+        MANAGER(string id, string name, int age, int gender, int role, bool status, string address){
+            this->id = id;
+            this->name = name;
+            this->age = age;
+            this->gender = gender;
+            this->role = role;
+            this->status = status;
+            this->address = address;
+        };
+        string getAdress(){
+            return this->address;
+        }
+        void setAddress(string address){
+            this->address = address;
+        }
+};
+
+class EMPLOYEE:virtual public PEOPLE{
+    private:
+        string department;
+    public:
+         EMPLOYEE(string id, string name, int age, int gender, int role, bool status, string department){
+            this->id = id;
+            this->name = name;
+            this->age = age;
+            this->gender = gender;
+            this->role = role;
+            this->status = status;
+            this->department = department;
+        };
+        EMPLOYEE(){};
+        void setDepartment(string department){
+            this->department = department;
+        }
+        string getDepartment(){
+            return this->department;
+        }
+};
+class RESIDENT:virtual public PEOPLE{
+    private:
+        string roomNumber;
+    public:
+        RESIDENT(){};
+        RESIDENT(string id, string name, int age, int gender, int role, bool status, string roomNumber){
+            this->id = id;
+            this->name = name;
+            this->age = age;
+            this->gender = gender;
+            this->role = role;
+            this->status = status;
+            this->roomNumber = roomNumber;
+        };
+        void setRoomNumber(string roomNumber){
+            this->roomNumber = roomNumber;
+        }
+        string getRoomNumber(){
+            return this->roomNumber;
+        }
+
+};
+
+class USER: public MANAGER, public EMPLOYEE, public RESIDENT{
+	private:
+////		string id;
+////		string name;
+////		int age;
+////		int gender;
+////		int role;
+////		bool status;
+	public:
 		USER(string id, string name, int _age, int _gender, int _role, bool _status)
 		{
             this->id = id;
             this->name = name;
-		    age = _age;
-		    gender = _gender;
-		    role = _role;
-		    status = _status;
+            this->age = _age;
+		    this->gender = _gender;
+		    this->role = _role;
+		    this->status = _status;
 		}
 		USER(){};
 
