@@ -5,6 +5,7 @@
 #include "userClass.cpp"
 #include "menuClass.cpp"
 #include "dateTime.cpp"
+#include "doorClass.cpp"
 // #include "logClass.cpp"
 using namespace std;
 
@@ -14,6 +15,7 @@ private:
     vector<USER> usersList;
     USER user;
     DateTime dateTime;
+    Door door;
     vector<USER> logList;      // truy xuat
     vector<string> timeLogIn;  // song song
     vector<string> timeLogOut; // ca 3 cai
@@ -83,7 +85,7 @@ inline USER Command::getCurrentUser(string id)
 inline void Command::getLogList() {
     cout<<"----------------------------------------------DANH SACH RA VAO--------------------------------------------\n\n";
     cout<<"==========================================================================================================\n";
-    cout<<"|"<<setw(8)<<"ID   "<<"|"<< setw(20) << "HO VA TEN     " <<"|"<< setw(11)<<"CHUC VU  " <<"|"<< setw(31) << "Thoi gian vao         " <<"|"<< setw(30) << "Thoi gian ra         "<<"|"<<endl;
+    cout<<"|"<<setw(8)<<"ID   "<<"|"<< setw(20) << "HO VA TEN     " <<"|"<< setw(11)<<"CHUC VU  " <<"|"<< setw(31) << "THOI GIAN VAO         " <<"|"<< setw(30) << "THOI GIAN RA         "<<"|"<<endl;
     cout<<"==========================================================================================================\n";
 
     for (int i = 0; i < logList.size(); i++)
@@ -125,30 +127,41 @@ inline int Command::checkRole()
 
 inline void Command::checkIn()
 {
-    if (checkId())
+   if (checkId())
     {
-        user.setStatus(true);
-        string time = dateTime.currentDateTime();
-        int index = getIndexById(user.getId()); // tim xem user da co trong ds log chua
-        if (index != -1)
+        system("cls");
+        door.input();
+        if (door.doorCheckIn(user.getId()))
         {
-            timeLogIn[index] = time;
-            cout << "Ban da di vao!" << endl;
-            cout << setw(12) << "Thoi Gian: " << setw(30) << time << endl;
+            user.setStatus(true);
+            string time = dateTime.currentDateTime();
+            int index = getIndexById(user.getId()); // tim xem user da co trong ds log chua
+            if (index != -1)
+            {
+                timeLogIn[index] = time;
+                cout << "Ban da di vao!" << endl;
+                cout << setw(12) << "Thoi Gian: " << setw(30) << time << endl;
+            }
+            else
+            {
+                USER currentUser = getCurrentUser(user.getId());
+                logList.push_back(currentUser);
+                timeLogIn.push_back(time);
+                timeLogOut.push_back("NUll");
+                cout << "Ban da di vao!" << endl;
+                cout << setw(12) << "Id: " << setw(30) << currentUser.getId() << endl;
+                cout << setw(12) << "Ho va Ten: " << setw(30) << currentUser.getName() << endl;
+                cout << setw(12) << "Thoi Gian: " << setw(30) << time << endl;
+            }
         }
         else
         {
-            USER currentUser = getCurrentUser(user.getId());
-            logList.push_back(currentUser);
-            timeLogIn.push_back(time);
-            timeLogOut.push_back("NUll");
-            cout << "Ban da di vao!" << endl;
-            cout << setw(12) << "Id: " << setw(30) << currentUser.getId() << endl;
-            cout << setw(12) << "Ho va Ten: " << setw(30) << currentUser.getName() << endl;
-            cout << setw(12) << "Thoi Gian: " << setw(30) << time << endl;
+            cout << "Ban khong vao duoc cua nay!";
         }
-        getch();
+            getch();
     }
+
+
 }
 
 inline void Command::checkOut()
