@@ -20,9 +20,13 @@ int main()
         {
             command.managerView();
         }
-        else if(command.checkRole() == 2 || command.checkRole() == 3)
+        else if(command.checkRole() == 2)
         {
             command.residentView();
+        }
+        else if(command.checkRole() == 3)
+        {
+            command.employeeView();
         }
     }
     while(command.choose != 9);
