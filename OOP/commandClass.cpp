@@ -60,7 +60,7 @@ public:
     int getIndexById(string);    // Su dung de quan ly thoi gian vao ra
     void getLogList();           // Danh sach thoi gian vao ra
     void tableTitle();           // Tieu de bang cho cac danh sach
-
+    void employeeView();
 };
 
 inline int Command::getIndexById(string id)
@@ -366,6 +366,27 @@ inline void Command::residentView()
         }
     } while (choose != 9 && choose != 3);
 }
+
+inline void Command::employeeView()
+{
+    do
+    {
+        system("cls");
+        choose = employeeMenu();
+        system("cls");
+        switch (choose)
+        {
+        case 1:
+            checkIn();
+            break;
+        case 2:
+            checkOut();
+            break;
+        }
+    } while (choose != 9 && choose != 3);
+}
+
+
 inline void Command:: tableTitle(){
     cout<<"==============================================================\n";
     cout<<"|"<<setw(8)<<"ID   ";

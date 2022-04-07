@@ -1,12 +1,12 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-
+#include <stdlib.h>
+#include <sstream>
 using namespace std;
 
 class Menu
 {
-private:
     int generalMenu();
     int residentMenu();
     int managerMenu();
@@ -50,6 +50,19 @@ inline int generalMenu(){
 
 
 inline int residentMenu(){
+	cout<<"************He thong ra vao toa nha***************\n";
+	cout<<"**************************************************\n";
+	cout<<"*  1. Check in.                                  *\n";
+	cout<<"*  2. Check out.                                 *\n";
+	cout<<"*  3. Dang xuat                                  *\n";
+	cout<<"*  9. Thoat chuong trinh                         *\n";
+	cout<<"*  Hay nhap 1,2,3 hoac 9                         *\n";
+	cout<<"**************************************************\n";
+    int choice[4] = {1,2,3,9};
+    return input(choice, 4);
+}
+
+inline int employeeMenu(){
 	cout<<"************He thong ra vao toa nha***************\n";
 	cout<<"**************************************************\n";
 	cout<<"*  1. Check in.                                  *\n";
