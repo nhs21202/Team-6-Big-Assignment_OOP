@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <string>
 #include<windows.h>
+#pragma once
 
 using namespace std;
 class PEOPLE{
@@ -14,6 +15,7 @@ class PEOPLE{
 		int role;
 		bool status;
 	public:
+
         PEOPLE(){};
         PEOPLE(string id, string name, int age, int gender, int role, bool status){
             this->id = id;
@@ -30,6 +32,13 @@ class MANAGER: virtual public PEOPLE{
     private:
         string address;
     public:
+        string getAdress(){
+            return this->address;
+        }
+        void setAddress(string address){
+            this->address = address;
+        }
+
         MANAGER(){};
         MANAGER(string id, string name, int age, int gender, int role, bool status, string address){
             this->id = id;
@@ -40,19 +49,20 @@ class MANAGER: virtual public PEOPLE{
             this->status = status;
             this->address = address;
         };
-        string getAdress(){
-            return this->address;
-        }
-        void setAddress(string address){
-            this->address = address;
-        }
 };
 
 class EMPLOYEE:virtual public PEOPLE{
     private:
         string department;
     public:
-         EMPLOYEE(string id, string name, int age, int gender, int role, bool status, string department){
+        EMPLOYEE(){};
+        void setDepartment(string department){
+            this->department = department;
+        }
+        string getDepartment(){
+            return this->department;
+        }
+        EMPLOYEE(string id, string name, int age, int gender, int role, bool status, string department){
             this->id = id;
             this->name = name;
             this->age = age;
@@ -61,18 +71,18 @@ class EMPLOYEE:virtual public PEOPLE{
             this->status = status;
             this->department = department;
         };
-        EMPLOYEE(){};
-        void setDepartment(string department){
-            this->department = department;
-        }
-        string getDepartment(){
-            return this->department;
-        }
 };
 class RESIDENT:virtual public PEOPLE{
     private:
         string roomNumber;
     public:
+
+        void setRoomNumber(string roomNumber){
+            this->roomNumber = roomNumber;
+        }
+        string getRoomNumber(){
+            return this->roomNumber;
+        }
         RESIDENT(){};
         RESIDENT(string id, string name, int age, int gender, int role, bool status, string roomNumber){
             this->id = id;
@@ -83,34 +93,12 @@ class RESIDENT:virtual public PEOPLE{
             this->status = status;
             this->roomNumber = roomNumber;
         };
-        void setRoomNumber(string roomNumber){
-            this->roomNumber = roomNumber;
-        }
-        string getRoomNumber(){
-            return this->roomNumber;
-        }
-
 };
 
 class USER: public MANAGER, public EMPLOYEE, public RESIDENT{
 	private:
-////		string id;
-////		string name;
-////		int age;
-////		int gender;
-////		int role;
-////		bool status;
+
 	public:
-		USER(string id, string name, int _age, int _gender, int _role, bool _status)
-		{
-            this->id = id;
-            this->name = name;
-            this->age = _age;
-		    this->gender = _gender;
-		    this->role = _role;
-		    this->status = _status;
-		}
-		USER(){};
 
 		void setId(string id);
 		string getId();
@@ -135,6 +123,17 @@ class USER: public MANAGER, public EMPLOYEE, public RESIDENT{
 
 		string toStringGender();
 		string toStringRole();
+
+		USER(){};
+		USER(string id, string name, int _age, int _gender, int _role, bool _status)
+		{
+            this->id = id;
+            this->name = name;
+            this->age = _age;
+		    this->gender = _gender;
+		    this->role = _role;
+		    this->status = _status;
+		}
 };
 
 inline void USER::setId(string id){
